@@ -34,8 +34,15 @@ void AlphaRun(AlphaConfig *conf)
     sf::Texture texture = {};
     sf::Sprite  sprite  = {};
 
-    sf::Clock clock     = {};
-    int32_t   frame_cnt = 0;
+    sf::Clock clock_10sec = {};
+    sf::Clock clock       = {};
+
+    int32_t frame_cnt = 0;
+
+    double   sum   = 0;
+    uint64_t ticks = 0;
+
+    float fps_avg = 0;
 
     while (window.isOpen())
     {
@@ -59,8 +66,21 @@ void AlphaRun(AlphaConfig *conf)
 
         float fps = GetFPS(&clock, &frame_cnt) * ACCURANCY;
 
+        sum += fps;
+        ++ticks;
+
+        if (clock_10sec.getElapsedTime().asSeconds() > 10.f)
+        {
+            fps_avg = sum / ticks;
+
+            sum   = 0;
+            ticks = 0;
+
+            clock_10sec.restart();
+        }
+
         char title[16] = "";
-        snprintf(title, sizeof(title), "%.2f", fps);
+        snprintf(title, sizeof(title), "%.2f", fps_avg);
         
         window.setTitle(title);
         window.clear();

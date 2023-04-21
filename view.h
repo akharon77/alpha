@@ -8,7 +8,7 @@
 const int32_t MAX_FRAME_CNT = 1000;
 
 #ifdef _MEASURE
-const int32_t ACCURANCY     = 100;
+const int32_t ACCURANCY     = 5000;
 #else
 const int32_t ACCURANCY     = 1;
 #endif
@@ -16,6 +16,6 @@ const int32_t ACCURANCY     = 1;
 void  AlphaGetImage (const AlphaConfig *conf, sf::Image *img);
 void  AlphaRun      (      AlphaConfig *conf);
 
-float GetFPS       (sf::Clock *clock, int32_t *frame_cnt);
+float GetFPS        (sf::Clock *clock, int32_t *frame_cnt);
 
 #endif  // VIEW_H

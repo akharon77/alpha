@@ -3,6 +3,40 @@
 #include <immintrin.h>
 #include <stdint.h>
 
+void AlphaCalcNoOpts(AlphaConfig *conf)
+{
+    uint32_t pos = 0;
+
+    const uint8_t *front_ptr = conf->front_img.getPixelsPtr();
+    const uint8_t  *back_ptr = conf-> back_img.getPixelsPtr();
+
+    for (uint32_t row = 0; row < conf->height; ++row)
+    {
+        for (uint32_t col = 0; col < conf->width; ++col, pos += BYTES_PER_PIXEL)
+        {
+            uint32_t front_color = *(uint32_t*) (front_ptr + pos);
+            uint32_t  back_color = *(uint32_t*) ( back_ptr + pos);
+
+            uint32_t alpha = (front_color >> 0x18) & 0xFF;
+
+            uint32_t a = (uint16_t)  ((back_color >> 0x18) & 0xFF);
+
+            uint32_t r = ((uint16_t) ( front_color          & 0xFF) * alpha +
+                         (uint16_t) (  back_color          & 0xFF) * (255 - alpha)) >> 8;
+
+            uint32_t g = ((uint16_t) ((front_color >> 0x8 ) & 0xFF) * alpha +
+                         (uint16_t) (( back_color >> 0x8 ) & 0xFF) * (255 - alpha)) >> 8;
+
+            uint32_t b = ((uint16_t) ((front_color >> 0x10) & 0xFF) * alpha +
+                         (uint16_t) (( back_color >> 0x10) & 0xFF) * (255 - alpha)) >> 8;
+
+            *(uint32_t*) (conf->res + pos) = (a << 0x18) +
+                                             (b << 0x10) +
+                                             (g <<  0x8) + r;
+        }
+    }
+}
+
 void AlphaCalcAVX512(AlphaConfig *conf)
 {
     uint32_t pos = 0;

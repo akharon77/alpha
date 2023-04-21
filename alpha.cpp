@@ -4,6 +4,9 @@
 #include "alpha.h"
 #include "calc.h"
 
+const char *DEFAULT_BACKGROUND = "img/Table.bmp";
+const char *DEFAULT_FOREGROUND = "img/AskhatCat.bmp";
+
 void AlphaConfigCtor(AlphaConfig *conf, const char *back_path, const char *front_path)
 {
     assert(conf && "conf is NULL");

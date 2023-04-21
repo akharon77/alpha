@@ -3,7 +3,7 @@
 int main()
 {
     AlphaConfig conf = {};
-    AlphaConfigCtor(&conf, "Table.bmp", "AskhatCat.bmp");
+    AlphaConfigCtor(&conf, DEFAULT_BACKGROUND, DEFAULT_FOREGROUND);
 
     AlphaRun(&conf);
 

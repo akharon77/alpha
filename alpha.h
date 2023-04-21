@@ -1,9 +1,12 @@
-#ifndef MAND_H
-#define MAND_H
+#ifndef ALPHA_H
+#define ALPHA_H
 
 #include <SFML/Graphics.hpp>
 
 #include <stdint.h>
+
+extern const char *DEFAULT_BACKGROUND;
+extern const char *DEFAULT_FOREGROUND;
 
 const uint32_t BYTES_PER_PIXEL = 4;
 
@@ -21,4 +24,4 @@ struct AlphaConfig
 void AlphaConfigCtor (AlphaConfig *conf, const char *back_path, const char *front_path);
 void AlphaConfigDtor (AlphaConfig *conf);
 
-#endif  // MAND_H
+#endif  // ALPHA_H
