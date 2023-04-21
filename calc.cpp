@@ -22,13 +22,13 @@ void AlphaCalcNoOpts(AlphaConfig *conf)
             uint32_t a = (uint16_t)  ((back_color >> 0x18) & 0xFF);
 
             uint32_t r = ((uint16_t) ( front_color          & 0xFF) * alpha +
-                         (uint16_t) (  back_color          & 0xFF) * (255 - alpha)) >> 8;
+                          (uint16_t) (  back_color          & 0xFF) * (255 - alpha)) >> 8;
 
             uint32_t g = ((uint16_t) ((front_color >> 0x8 ) & 0xFF) * alpha +
-                         (uint16_t) (( back_color >> 0x8 ) & 0xFF) * (255 - alpha)) >> 8;
+                          (uint16_t) (( back_color >> 0x8 ) & 0xFF) * (255 - alpha)) >> 8;
 
             uint32_t b = ((uint16_t) ((front_color >> 0x10) & 0xFF) * alpha +
-                         (uint16_t) (( back_color >> 0x10) & 0xFF) * (255 - alpha)) >> 8;
+                          (uint16_t) (( back_color >> 0x10) & 0xFF) * (255 - alpha)) >> 8;
 
             *(uint32_t*) (conf->res + pos) = (a << 0x18) +
                                              (b << 0x10) +
