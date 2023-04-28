@@ -80,25 +80,7 @@
     movzx   r10d,   sil
     shr     r13d,   24
     movzx   ebp,    ah
-    vmovq   rax,    xmm0
-    sub     r12d,   r13d
-    imul    ebx,    r13d
-    imul    ebp,    r12d
-    imul    r10d,   r12d
-    add     ebx,    ebp
-    movzx   ebp,    cl
-    shr     ecx,    16
-    imul    ebp,    r13d
-    xor     bl,     bl
-    movzx   ecx,    cl
-    imul    ecx,    r13d
-    add     ebp,    r10d
-    shr     ebp,    8
-    add     ebx,    ebp
-    mov     ebp,    esi
-    shr     esi,    16
-    movzx   esi,    sil
-    and     ebp,    -16777216
+    <...>
     imul    esi,    r12d
     add     ebx,    ebp
     add     ecx,    esi
@@ -107,6 +89,8 @@
     add     ebx,    ecx
 ```
 Компилятор не может понять логику расчёта пикселей с расширением их компонент даже с указанием кода с битовыми сдвигами.
+
+*Пояснение*. Читателю предлагается посмотреть полный код по [ссылке на godbolt](https://godbolt.org/z/aWc8Yn5rW)
 
 ## Оптимизировнная версия с `-O2`:
 ```
